@@ -1,6 +1,6 @@
 ShadowsocksR-libev for OpenWrt
 ===
-[![Download][B]][4]  
+
 
 简介
 ---
