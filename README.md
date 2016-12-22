@@ -11,7 +11,7 @@ ShadowsocksR-libev for OpenWrt
 ---
 
 软件包包含 [shadowsocksr-libev][1] 的可执行文件,以及luci控制界面  
-   
+
 
 编译
 ---
@@ -26,9 +26,17 @@ ShadowsocksR-libev for OpenWrt
    ./scripts/feeds update packages
    ./scripts/feeds install libpcre
    # 获取 Makefile
-   git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
-   # 选择要编译的包 Network -> shadowsocks-libev
+   git clone https://github.com/ywb/openwrt-ssr.git package/openwrt-ssr
+   # 选择要编译的包 luci ->3. Applications-> luci-app-shadowsocksR
    make menuconfig
+   
+   #如果没有安装po2lmo，则安装（可选）
+   pushd package/openwrt-ssr/tools/po2lmo
+   make && sudo make install
+   popd
+   #编译语言文件（可选）
+   po2lmo ./package/openwrt-ssr/files/luci/i18n/shadowsocksr.zh-cn.po ./package/openwrt-ssr/files/luci/i18n/shadowsocksr.zh-cn.lmo
+   
    # 开始编译
    make package/shadowsocks-libev/compile V=99
    ```
