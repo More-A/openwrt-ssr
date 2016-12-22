@@ -1,11 +1,13 @@
 ShadowsocksR-libev for OpenWrt
 ===
-
+[![Download][B]][4]  
 
 简介
 ---
 
  本项目是 [shadowsocksr-libev][1] 在 OpenWrt 上的移植  
+ 
+ [预编译IPK下载][4]
 
 特性
 ---
@@ -38,7 +40,7 @@ ShadowsocksR-libev for OpenWrt
    po2lmo ./package/openwrt-ssr/files/luci/i18n/shadowsocksr.zh-cn.po ./package/openwrt-ssr/files/luci/i18n/shadowsocksr.zh-cn.lmo
    
    # 开始编译
-   make package/shadowsocks-libev/compile V=99
+   make V=99
    ```
 
 配置
@@ -62,4 +64,5 @@ ShadowsocksR-libev for OpenWrt
   [1]: https://github.com/breakwa11/shadowsocks-libev
   [2]: https://github.com/shadowsocks/luci-app-shadowsocks/wiki/Encrypt-method
   [3]: https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
+  [4]: http://iytc.net/tools/luci-app-shadowsocksR_1.0-1_all.ipk "预编译 IPK 下载"  
   [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
