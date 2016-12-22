@@ -11,7 +11,7 @@ ShadowsocksR-libev for OpenWrt
 ---
 
 软件包包含 [shadowsocksr-libev][1] 的可执行文件,以及luci控制界面  
-   ```
+   
 
 编译
 ---
