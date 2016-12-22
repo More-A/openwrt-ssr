@@ -1,0 +1,57 @@
+ShadowsocksR-libev for OpenWrt
+===
+
+
+简介
+---
+
+ 本项目是 [shadowsocksr-libev][1] 在 OpenWrt 上的移植  
+
+特性
+---
+
+软件包包含 [shadowsocksr-libev][1] 的可执行文件,以及luci控制界面  
+   ```
+
+编译
+---
+
+ - 从 OpenWrt 的 [SDK][S] 编译
+
+   ```bash
+   # 以 ar71xx 平台为例
+   tar xjf OpenWrt-SDK-ar71xx-for-linux-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2.tar.bz2
+   cd OpenWrt-SDK-ar71xx-*
+   # 安装 feeds
+   ./scripts/feeds update packages
+   ./scripts/feeds install libpcre
+   # 获取 Makefile
+   git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
+   # 选择要编译的包 Network -> shadowsocks-libev
+   make menuconfig
+   # 开始编译
+   make package/shadowsocks-libev/compile V=99
+   ```
+
+配置
+---
+
+   软件包可以通过luci配置，也可以通过配置文件, 配置文件内容为 JSON 格式, 支持的键:  
+
+   键名           | 数据类型   | 说明
+   ---------------|------------|-----------------------------------------------
+   server         | 字符串     | 服务器地址, 可以是 IP 或者域名
+   server_port    | 数值       | 服务器端口号, 小于 65535
+   local_port     | 数值       | 本地绑定的端口号, 小于 65535
+   password       | 字符串     | 服务端设置的密码
+   method         | 字符串     | 加密方式, [详情参考][2]
+   timeout        | 数值       | 超时时间（秒）, 默认 60
+   protocol       | 字符串     | 协议插件，默认"origin"[详情参考][3]
+   obfs           | 字符串     | 混淆插件 [详情参考][3]
+   obfs_param     | 字符串     | 混淆插件参数 [详情参考][3]
+
+
+  [1]: https://github.com/breakwa11/shadowsocks-libev
+  [2]: https://github.com/shadowsocks/luci-app-shadowsocks/wiki/Encrypt-method
+  [3]: https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
+  [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
