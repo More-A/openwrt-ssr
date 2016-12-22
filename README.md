@@ -7,7 +7,7 @@ ShadowsocksR-libev for OpenWrt
 
  本项目是 [shadowsocksr-libev][1] 在 OpenWrt 上的移植  
  
- [预编译IPK下载][4]
+ [ar71xx平台预编译IPK下载][4]
 
 特性
 ---
@@ -45,8 +45,10 @@ ShadowsocksR-libev for OpenWrt
    
 安装
 --- 
-本软件包依赖库：libopenssl、libpthread、ipset、ip、iptables-mod-tproxy、libpcre，opkg会自动安装，需先update软件包列表
-先将luci-app-shadowsocksR_*_all.ipk通过winscp上传到路由器的/tmp目录
+本软件包依赖库：libopenssl、libpthread、ipset、ip、iptables-mod-tproxy、libpcre，opkg会自动安装
+
+先将编译成功的luci-app-shadowsocksR_*_all.ipk通过winscp上传到路由器的/tmp目录，执行命令：
+
    ```
    #opkg update
    #opkg install /tmp/luci-app-shadowsocksR_*_all.ipk 
