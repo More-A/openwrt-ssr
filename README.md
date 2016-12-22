@@ -42,6 +42,13 @@ ShadowsocksR-libev for OpenWrt
    # 开始编译
    make V=99
    ```
+   
+安装
+--- 
+本软件包依赖库：libopenssl、libpthread、ipset、ip、iptables-mod-tproxy、libpcre，opkg会自动安装，需先update软件包列表
+先将luci-app-shadowsocksR_*_all.ipk通过winscp上传到路由器的/tmp目录
+#opkg update
+#opkg install /tmp/luci-app-shadowsocksR_*_all.ipk 
 
 配置
 ---
@@ -59,6 +66,11 @@ ShadowsocksR-libev for OpenWrt
    protocol       | 字符串     | 协议插件，默认"origin"[详情参考][3]
    obfs           | 字符串     | 混淆插件 [详情参考][3]
    obfs_param     | 字符串     | 混淆插件参数 [详情参考][3]
+
+截图  
+---
+
+![luci000](https://iytc.net/img/ssr.jpg)
 
 
   [1]: https://github.com/breakwa11/shadowsocks-libev
