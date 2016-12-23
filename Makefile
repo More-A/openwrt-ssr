@@ -95,6 +95,8 @@ define Package/openwrt-ssr/install
 	$(INSTALL_BIN) ./files/shadowsocksr.rule $(1)/usr/bin/ssr-rules
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_DATA) ./files/shadowsocksr.config $(1)/etc/config/shadowsocksr
+	$(INSTALL_DIR) $(1)/etc
+	$(INSTALL_DATA) ./files/china_ssr.txt $(1)/etc/china_ssr.txt	
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/shadowsocksr.spec $(1)/etc/init.d/shadowsocksr
 endef
