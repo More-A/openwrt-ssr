@@ -68,7 +68,7 @@ s = m:section(TypedSection, "global", translate("Global Setting"))
 s.anonymous = true
 
 o = s:option(ListValue, "global_server", translate("Global Server"))
-o:value("nil", translate("Disable ShadowSocks"))
+o:value("nil", translate("Disable ShadowSocksR"))
 for k, v in pairs(server_table) do o:value(k, v) end
 o.default = "nil"
 o.rmempty = false

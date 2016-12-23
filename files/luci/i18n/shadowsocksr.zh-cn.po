@@ -22,8 +22,8 @@ msgstr "全局设置"
 msgid "Global Server"
 msgstr "全局服务器"
 
-msgid "Disable ShadowSocks"
-msgstr "停用ShadowSocks"
+msgid "Disable ShadowSocksR"
+msgstr "停用ShadowSocksR"
 
 msgid "UDP Relay Server"
 msgstr "UDP中继服务器"
