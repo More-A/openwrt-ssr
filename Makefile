@@ -53,6 +53,22 @@ endef
 
 Package/luci-app-shadowsocksR/description = $(call Package/openwrt-ssr/description,shadowsocksr-libev)
 
+define Package/openwrt-ssr/prerm
+#!/bin/sh
+# check if we are on real system
+if [ -z "$${IPKG_INSTROOT}" ]; then
+    echo "Removing rc.d symlink for shadowsocksr"
+     /etc/init.d/$(1) disable
+    echo "Removing firewall rule for shadowsocksr"
+	  uci -q batch <<-EOF >/dev/null
+		delete firewall.shadowsocksr
+		commit firewall
+EOF
+fi
+exit 0
+endef
+
+Package/luci-app-shadowsocksR/prerm = $(call Package/openwrt-ssr/prerm,shadowsocksr)
 
 define Package/openwrt-ssr/postinst
 #!/bin/sh
