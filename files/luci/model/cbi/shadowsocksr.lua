@@ -40,15 +40,22 @@ local encrypt_methods = {
 local protocol = {
 	"origin",
 	"verify_simple",
+	"verify_deflate",
+	"verify_sha1",		
 	"auth_simple",
 	"auth_sha1",
 	"auth_sha1_v2",
+	"auth_sha1_v4",
+	"auth_aes128_sha1",
+	"auth_aes128_md5",
 }
 
 obfs = {
 	"plain",
 	"http_simple",
-	"tls1.0_session_auth",
+	"http_post",
+	"tls1.0_session_auth",	
+	"tls1.2_session_auth",
 }
 
 ipkg.list_installed("shadowsocks-libev-spec-polarssl", function(n, v, d)
