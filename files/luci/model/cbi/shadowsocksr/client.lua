@@ -1,6 +1,5 @@
---[[
-openwrt-dist-luci: ShadowSocksR
-]]--
+-- Copyright (C) 2016 yushi studio <ywb94@qq.com>
+-- Licensed to the public under the GNU General Public License v3.
 
 local m, s, o
 local shadowsocksr = "shadowsocksr"
@@ -75,7 +74,7 @@ s = m:section(TypedSection, "global", translate("Global Setting"))
 s.anonymous = true
 
 o = s:option(ListValue, "global_server", translate("Global Server"))
-o:value("nil", translate("Disable ShadowSocksR"))
+o:value("nil", translate("Disable ShadowSocksR Client"))
 for k, v in pairs(server_table) do o:value(k, v) end
 o.default = "nil"
 o.rmempty = false

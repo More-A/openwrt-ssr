@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "ShadowSocksR Client"
-msgstr "ShadowSocksR客户端"
+msgstr "ShadowSocksR 客户端"
 
 msgid "Enable"
 msgstr "启用"
@@ -11,10 +11,10 @@ msgid "Disable"
 msgstr "停用"
 
 msgid "ShadowSocksR is running"
-msgstr "ShadowSocksR 运行中"
+msgstr "ShadowSocksR 客户端运行中"
 
 msgid "ShadowSocksR is not running"
-msgstr "ShadowSocksR 未运行"
+msgstr "ShadowSocksR 客户端未运行"
 
 msgid "Global Setting"
 msgstr "全局设置"
@@ -22,8 +22,8 @@ msgstr "全局设置"
 msgid "Global Server"
 msgstr "全局服务器"
 
-msgid "Disable ShadowSocksR"
-msgstr "停用ShadowSocksR"
+msgid "Disable ShadowSocksR Client"
+msgstr "停用 ShadowSocksR 客户端"
 
 msgid "UDP Relay Server"
 msgstr "UDP中继服务器"
@@ -108,3 +108,24 @@ msgstr "仅允许列表外"
 
 msgid "LAN Host List"
 msgstr "内网主机列表"
+
+msgid "Client"
+msgstr "客户端"
+
+msgid "SSR Server"
+msgstr "服务端"
+
+msgid "ShadowSocksR Server"
+msgstr "ShadowSocksR 服务端"
+
+msgid "ShadowSocksR Server is running"
+msgstr "ShadowSocksR 服务端运行中"
+
+msgid "ShadowSocksR Server is not running"
+msgstr "ShadowSocksR 服务端未运行"
+
+msgid "Enable Server"
+msgstr "启动服务端"
+
+msgid "Server Setting"
+msgstr "服务端配置"
