@@ -131,7 +131,6 @@ for _, v in ipairs(obfs) do o:value(v) end
 o.rmempty = false
 
 o = s:option(Value, "obfs_param", translate("obfs_param"))
-o.rmempty = false
 
 -- [[ UDP Forward ]]--
 s = m:section(TypedSection, "udp_forward", translate("UDP Forward"))

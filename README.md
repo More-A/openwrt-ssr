@@ -20,6 +20,8 @@ ShadowsocksR-libev for OpenWrt
 
 可以和[Shadowsocks][5]共存，在openwrt可以通过luci界面切换使用[Shadowsocks][6]或ShadowsocksR
 
+兼容SS和SSR服务端，使用SS服务端时，传输协议需设置为origin，混淆插件需设置为plain
+
 
 编译
 ---
@@ -73,13 +75,13 @@ ShadowsocksR-libev for OpenWrt
    password       | 字符串     | 服务端设置的密码
    method         | 字符串     | 加密方式, [详情参考][2]
    timeout        | 数值       | 超时时间（秒）, 默认 60
-   protocol       | 字符串     | 协议插件，默认"origin"[详情参考][3]
-   obfs           | 字符串     | 混淆插件 [详情参考][3]
+   protocol       | 字符串     | 传输协议，默认"origin"[详情参考][3]
+   obfs           | 字符串     | 混淆插件，默认"plain" [详情参考][3]
    obfs_param     | 字符串     | 混淆插件参数 [详情参考][3]
    
 
    
-   安装启用后自动分流国内、外流量，更新国内IP数据库在openwrt上执行如下命令即可：
+   安装启用后自动分流国内、外流量，如需更新国内IP数据库在openwrt上执行如下命令即可：
    ```
    #wget -O- 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | awk -F\| '/CN\|ipv4/ { printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /etc/china_ssr.txt
          
