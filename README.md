@@ -14,6 +14,10 @@ ShadowsocksR-libev for OpenWrt
 
 软件包包含 [shadowsocksr-libev][1] 的可执行文件,以及luci控制界面  
 
+支持自动分流，国内IP不走代理，国外IP段走透明代理，不需要再安装chnroute、gfwlist等软件
+
+支持本地域名污染情况下的远程服务器解析，多数情况下无需对dns进行处理
+
 
 编译
 ---
@@ -73,7 +77,7 @@ ShadowsocksR-libev for OpenWrt
    
 
    
-   安装后自动分流国内、外流量，更新国内IP数据库在openwrt上执行如下命令即可：
+   安装启用后自动分流国内、外流量，更新国内IP数据库在openwrt上执行如下命令即可：
    ```
    #wget -O- 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | awk -F\| '/CN\|ipv4/ { printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /etc/china_ssr.txt
          
@@ -88,5 +92,5 @@ ShadowsocksR-libev for OpenWrt
   [1]: https://github.com/breakwa11/shadowsocks-libev
   [2]: https://github.com/shadowsocks/luci-app-shadowsocks/wiki/Encrypt-method
   [3]: https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
-  [4]: http://iytc.net/tools/luci-app-shadowsocksR_1.0-1_all.ipk "预编译 IPK 下载" 
+  [4]: http://iytc.net/tools/luci-app-shadowsocksR_last_all.ipk " Chaos Calmer 15.05预编译 IPK 下载" 
   [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
