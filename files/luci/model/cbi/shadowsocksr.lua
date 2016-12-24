@@ -8,9 +8,9 @@ local uci = luci.model.uci.cursor()
 local ipkg = require("luci.model.ipkg")
 
 if luci.sys.call("pidof ssr-redir >/dev/null") == 0 then
-	m = Map(shadowsocksr, translate("ShadowSocksR"), translate("ShadowSocksR is running"))
+	m = Map(shadowsocksr, translate("ShadowSocksR Client"), translate("ShadowSocksR is running"))
 else
-	m = Map(shadowsocksr, translate("ShadowSocksR"), translate("ShadowSocksR is not running"))
+	m = Map(shadowsocksr, translate("ShadowSocksR Client"), translate("ShadowSocksR is not running"))
 end
 
 
@@ -20,9 +20,13 @@ local encrypt_methods = {
 	"table",
 	"rc4",
 	"rc4-md5",
+	"rc4-md5-6",
 	"aes-128-cfb",
 	"aes-192-cfb",
 	"aes-256-cfb",
+	"aes-128-ctr",
+	"aes-192-ctr",
+	"aes-256-ctr",	
 	"bf-cfb",
 	"camellia-128-cfb",
 	"camellia-192-cfb",
@@ -126,7 +130,7 @@ o = s:option(ListValue, "obfs", translate("obfs"))
 for _, v in ipairs(obfs) do o:value(v) end
 o.rmempty = false
 
-o = s:option(Value, "obfs_param", translate("obfs_param"))
+o = s:option(Value, "obfs_param", translate("obfs_param(optional)"))
 
 -- [[ UDP Forward ]]--
 s = m:section(TypedSection, "udp_forward", translate("UDP Forward"))

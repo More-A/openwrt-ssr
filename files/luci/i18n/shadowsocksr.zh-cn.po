@@ -1,8 +1,8 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "ShadowSocksR"
-msgstr "ShadowSocksR"
+msgid "ShadowSocksR Client"
+msgstr "ShadowSocksR客户端"
 
 msgid "Enable"
 msgstr "启用"
@@ -64,7 +64,7 @@ msgstr "传输协议"
 msgid "obfs"
 msgstr "混淆插件"
 
-msgid "obfs_param"
+msgid "obfs_param(optional)"
 msgstr "混淆参数（可选）"
 
 msgid "UDP Forward"
@@ -87,9 +87,6 @@ msgstr "被忽略IP列表"
 
 msgid "NULL - As Global Proxy"
 msgstr "留空 - 作为全局代理"
-
-msgid "ChinaDNS CHNRoute"
-msgstr "ChinaDNS路由表"
 
 msgid "Bypassed IP"
 msgstr "额外被忽略IP"
