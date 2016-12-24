@@ -13,7 +13,7 @@ else
 	m = Map(shadowsocksr, translate("ShadowSocksR"), translate("ShadowSocksR is not running"))
 end
 
-local chnroute = uci:get_first("chinadns", "chinadns", "chnroute")
+
 local server_table = {}
 local arp_table = luci.sys.net.arptable() or {}
 local encrypt_methods = {
@@ -40,9 +40,7 @@ local encrypt_methods = {
 local protocol = {
 	"origin",
 	"verify_simple",
-	"verify_deflate",
 	"verify_sha1",		
-	"auth_simple",
 	"auth_sha1",
 	"auth_sha1_v2",
 	"auth_sha1_v4",
@@ -54,13 +52,11 @@ obfs = {
 	"plain",
 	"http_simple",
 	"http_post",
-	"tls1.0_session_auth",	
-	"tls1.2_session_auth",
+	"tls_simple",	
+	"tls1.2_ticket_auth",
 }
 
-ipkg.list_installed("shadowsocks-libev-spec-polarssl", function(n, v, d)
-	for i=1,5,1 do table.remove(encrypt_methods, 11) end
-end)
+
 
 uci:foreach(shadowsocksr, "servers", function(s)
 	if s.alias then
@@ -158,7 +154,7 @@ s:tab("wan_ac", translate("Interfaces - WAN"))
 
 o = s:taboption("wan_ac", Value, "wan_bp_list", translate("Bypassed IP List"))
 o:value("/dev/null", translate("NULL - As Global Proxy"))
-if chnroute then o:value(chnroute, translate("ChinaDNS CHNRoute")) end
+
 o.default = "/dev/null"
 o.rmempty = false
 
