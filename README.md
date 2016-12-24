@@ -18,6 +18,8 @@ ShadowsocksR-libev for OpenWrt
 
 支持本地域名污染情况下的远程服务器解析，多数情况下无需对dns进行处理
 
+可以和[Shadowsocks][5]共存，在openwrt可以通过luci界面切换使用[Shadowsocks][6]或ShadowsocksR
+
 
 编译
 ---
@@ -93,4 +95,6 @@ ShadowsocksR-libev for OpenWrt
   [2]: https://github.com/shadowsocks/luci-app-shadowsocks/wiki/Encrypt-method
   [3]: https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
   [4]: http://iytc.net/tools/luci-app-shadowsocksR_last_all.ipk " Chaos Calmer 15.05预编译 IPK 下载" 
+  [5]: https://github.com/shadowsocks/openwrt-shadowsocks
+  [6]: https://github.com/shadowsocks/luci-app-shadowsocks  
   [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
