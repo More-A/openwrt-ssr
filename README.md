@@ -71,9 +71,9 @@ ShadowsocksR-libev for OpenWrt
    obfs           | 字符串     | 混淆插件 [详情参考][3]
    obfs_param     | 字符串     | 混淆插件参数 [详情参考][3]
    
-   安装启用后如果无法访问特定网站，请参考[【此文】][5]进行设置，解决DNS域名污染问题。
+
    
-   安装后如要分流国内、外流量，请先在openwrt上执行如下命令，再在“访问控制”-“被忽略IP列表”中填上“/etc/china_ssr.txt”：
+   安装后自动分流国内、外流量，更新国内IP数据库在openwrt上执行如下命令即可：
    ```
    #wget -O- 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | awk -F\| '/CN\|ipv4/ { printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /etc/china_ssr.txt
          
@@ -89,5 +89,4 @@ ShadowsocksR-libev for OpenWrt
   [2]: https://github.com/shadowsocks/luci-app-shadowsocks/wiki/Encrypt-method
   [3]: https://github.com/breakwa11/shadowsocks-rss/wiki/config.json
   [4]: http://iytc.net/tools/luci-app-shadowsocksR_1.0-1_all.ipk "预编译 IPK 下载" 
-  [5]: http://blog.iytc.net/wordpress/?p=1512 
   [S]: https://wiki.openwrt.org/doc/howto/obtain.firmware.sdk
