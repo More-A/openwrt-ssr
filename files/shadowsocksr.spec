@@ -1,7 +1,7 @@
 #!/bin/sh /etc/rc.common
 #
-# Copyright (C) 2015 OpenWrt-dist
-# Copyright (C) 2015 Jian Chang <aa65535@live.com>
+# Copyright (C) 2016 openwrt-ssr
+# Copyright (C) 2016 yushi studio <ywb94@qq.com>
 #
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
@@ -25,9 +25,12 @@ uci_get_by_type() {
 }
 
 gen_config_file() {
+         local host=$(uci_get_by_name $1 server)
+         local hostip=`ping ${host} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
+         
 	cat <<-EOF >$CONFIG_FILE
 		{
-		    "server": "$(uci_get_by_name $1 server)",
+		    "server": "$hostip",
 		    "server_port": $(uci_get_by_name $1 server_port),
 		    "local_address": "0.0.0.0",
 		    "local_port": $(uci_get_by_name $1 local_port),
