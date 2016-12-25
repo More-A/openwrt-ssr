@@ -1,4 +1,4 @@
--- Copyright (C) 2016 yushi studio <ywb94@qq.com>
+-- Copyright (C) 2016 yushi studio <ywb94@qq.com> github.com/ywb94
 -- Licensed to the public under the GNU General Public License v3.
 
 local m, s, o
