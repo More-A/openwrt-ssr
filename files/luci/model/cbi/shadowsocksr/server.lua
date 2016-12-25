@@ -6,7 +6,7 @@ local shadowsocksr = "shadowsocksr"
 local uci = luci.model.uci.cursor()
 local ipkg = require("luci.model.ipkg")
 
-if luci.sys.call("pidof ssr-redir >/dev/null") == 0 then
+if luci.sys.call("pidof ssr-server >/dev/null") == 0 then
 	m = Map(shadowsocksr, translate("ShadowSocksR Server"), translate("ShadowSocksR Server is running"))
 else
 	m = Map(shadowsocksr, translate("ShadowSocksR Server"), translate("ShadowSocksR Server is not running"))

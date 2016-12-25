@@ -13,6 +13,7 @@ STOP=15
 NAME=shadowsocksr
 EXTRA_COMMANDS=rules
 CONFIG_FILE=/var/etc/$NAME.json
+CONFIG_SERVER_FILE=/var/etc/${NAME}_s.json
 
 uci_get_by_name() {
 	local ret=$(uci get $NAME.$1.$2 2>/dev/null)
@@ -26,9 +27,8 @@ uci_get_by_type() {
 
 gen_config_file() {
          local host=$(uci_get_by_name $1 server)
-         
          if echo $host|grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$">/dev/null; then         
-          hostip=${host}
+         hostip=${host}
          else
           hostip=`ping ${host} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
          fi
@@ -49,13 +49,29 @@ gen_config_file() {
 EOF
 }
 
+gen_server_config_file() {
+         
+	cat <<-EOF >$CONFIG_SERVER_FILE
+		{
+		    "server": "$(uci_get_by_type server_config server)",
+		    "server_port": $(uci_get_by_type server_config server_port),
+		    "password": "$(uci_get_by_type server_config password)",
+		    "timeout": $(uci_get_by_type server_config timeout 60),
+		    "method": "$(uci_get_by_type server_config encrypt_method)",
+		    "protocol": "$(uci_get_by_type server_config protocol)",
+		    "obfs": "$(uci_get_by_type server_config obfs)",
+		    "obfs_param": "$(uci_get_by_type server_config obfs_param)"
+		}
+EOF
+}
+
 start_rules() {
 	local server=$(uci_get_by_name $GLOBAL_SERVER server)
 	if echo $server|grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$">/dev/null; then         
-  server=${server}
-  else
-  server=`ping ${server} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
-  fi
+	server=${server}
+	else
+	server=`ping ${server} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
+	fi
 	local local_port=$(uci_get_by_name $GLOBAL_SERVER local_port)
 	local lan_ac_ips=$(uci_get_by_type access_control lan_ac_ips)
 	local lan_ac_mode=$(uci_get_by_type access_control lan_ac_mode)
@@ -107,6 +123,17 @@ start_redir() {
 	return $?
 }
 
+start_server() {
+  SERVER_ENABLE=$(uci_get_by_type server_global enable_server)
+  [ "$SERVER_ENABLE" = 0 ] && return 0
+	mkdir -p /var/run /var/etc
+	gen_server_config_file 
+	service_start /usr/bin/ssr-server -c $CONFIG_SERVER_FILE -u -f /var/run/ssr-server.pid 
+
+
+	return 0
+}
+
 start_tunnel() {
 	/usr/bin/ssr-tunnel \
 		-c $CONFIG_FILE $ARG_OTA ${ARG_UDP:="-u"} \
@@ -118,22 +145,27 @@ start_tunnel() {
 
 rules() {
 	GLOBAL_SERVER=$(uci_get_by_type global global_server)
-	[ "$GLOBAL_SERVER" = "nil" ] && exit 0
+	[ "$GLOBAL_SERVER" = "nil" ] && return 1
 	mkdir -p /var/run /var/etc
 	UDP_RELAY_SERVER=$(uci_get_by_type global udp_relay_server)
 	[ "$UDP_RELAY_SERVER" = "same" ] && UDP_RELAY_SERVER=$GLOBAL_SERVER
 	start_rules
+	return 0
 }
 
 start() {
-	rules && start_redir
+	if rules ;then
+	start_redir
 	case "$(uci_get_by_type udp_forward tunnel_enable)" in
 		1|on|true|yes|enabled) start_tunnel;;
 	esac
+	fi
+	start_server	
 }
 
 stop() {
 	/usr/bin/ssr-rules -f
 	killall -q -9 ssr-redir
 	killall -q -9 ssr-tunnel
+	killall -q -9 ssr-server
 }
