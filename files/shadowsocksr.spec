@@ -26,7 +26,12 @@ uci_get_by_type() {
 
 gen_config_file() {
          local host=$(uci_get_by_name $1 server)
-         local hostip=`ping ${host} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
+         
+         if echo $host|grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$">/dev/null; then         
+          hostip=${host}
+         else
+          hostip=`ping ${host} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
+         fi
          
 	cat <<-EOF >$CONFIG_FILE
 		{
@@ -46,6 +51,11 @@ EOF
 
 start_rules() {
 	local server=$(uci_get_by_name $GLOBAL_SERVER server)
+	if echo $server|grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$">/dev/null; then         
+  server=${server}
+  else
+  server=`ping ${server} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1`
+  fi
 	local local_port=$(uci_get_by_name $GLOBAL_SERVER local_port)
 	local lan_ac_ips=$(uci_get_by_type access_control lan_ac_ips)
 	local lan_ac_mode=$(uci_get_by_type access_control lan_ac_mode)
